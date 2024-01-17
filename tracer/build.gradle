@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+import org.apache.tools.ant.filters.ReplaceTokens
+
+task generateSources(type: Copy) {
+    from 'src/template/java'
+    into 'build/generated-src/java'
+    filter(ReplaceTokens, tokens: [
+        'PROJECT_DIRECTORY': projectDir.toString()
+    ])
+}
+
+compileJava.source "build/generated-src/java"
+compileJava.dependsOn generateSources

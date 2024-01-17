@@ -3,8 +3,13 @@ package tracer;
 import java.io.File;
 import java.io.OutputStreamWriter;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Clock;
 import java.time.Instant;
+
+import tracer.KeYobligation;
 
 public class Trace {
 
@@ -60,20 +65,33 @@ public class Trace {
         // unique trace name
         String traceName = "traceSec" + seconds + "Nano" + nano;
 
-        // construct the new unique trace directory
-        String traceDirName = "trace-out/" + traceName + "/tracer/";
-        File traceDir = new File(traceDirName);
-        traceDir.mkdirs();
-
-        // write trace (in form of the retrace class) to out
         try {
+            // construct the new unique trace directory
+            String traceDirName = "trace-out/" + traceName + "/tracer/";
+            File traceDir = new File(traceDirName);
+            traceDir.mkdirs();
+
+            // write trace (in form of the retrace class) to out
             out = new OutputStreamWriter(new FileOutputStream(traceDirName + "Trace.java"));
+
+            // symlink the original project
+            Path orig = Paths.get(KeYobligation.TRACED_SOURCE_FOLDER);
+            Path link = Paths.get("trace-out/" + traceName + "/src");
+            Files.createSymbolicLink(link, orig);
+
+            // write prolog
+            write(PROLOG);
+
+            // write key proof obligation file
+            OutputStreamWriter keyout
+                = new OutputStreamWriter(new FileOutputStream("trace-out/" + traceName + ".key"));
+            keyout.write(KeYobligation.PROLOG);
+            keyout.write("\\javaSource \"" + traceName + "/\";\n");
+            keyout.write(KeYobligation.EPILOG);
+            keyout.close();
         } catch (Exception e) {
             return;
         }
-
-        // write prolog
-        write(PROLOG);
     }
 
     public static void trace_next(int elm) {
