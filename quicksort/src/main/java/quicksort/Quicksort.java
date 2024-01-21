@@ -54,42 +54,40 @@ class Quicksort {
     public static void sort(int[] array) {
         Trace.trace_start();
         try {
-            Trace.trace_next(1);
             if(array.length > 0) {
-                Trace.trace_next(2);
+                Trace.taken();
                 sort(array, 0, array.length-1);
-            }
+            } else { Trace.not_taken(); }
         } finally {
             Trace.trace_end();
         }
     }
 
     private static void sort(int[] array, int from, int to) {
-        Trace.trace_next(3);
         if(from < to) {
-            Trace.trace_next(4);
+            Trace.taken();
             int splitPoint = split(array, from, to);
             sort(array, from, splitPoint-1);
             sort(array, splitPoint+1, to);
-        }
+        } else { Trace.not_taken(); }
     }
 
     private static int split(int[] array, int from, int to) {
-        Trace.trace_next(5);
 
         int i = from;
         int pivot = array[to];
 
         for(int j = from; j < to; j++) {
-            Trace.trace_next(6);
+            Trace.taken();
             if(array[j] <= pivot) {
-                Trace.trace_next(7);
+                Trace.taken();
                 int t = array[i];
                 array[i] = array[j];
                 array[j] = t;
                 i++;
-            }
+            } else { Trace.not_taken(); }
         }
+        Trace.not_taken();
 
         array[to] = array[i];
         array[i] = pivot;

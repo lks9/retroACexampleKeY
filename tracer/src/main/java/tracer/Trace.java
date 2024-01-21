@@ -44,6 +44,12 @@ public class Trace {
         "        //@ assume i == r.length;\n" +
         "        //@ set i = 0;\n" +
         "    }\n" +
+        "    public static void taken() {\n" +
+        "        trace_next(1);\n" +
+        "    }\n" +
+        "    public static void not_taken() {\n" +
+        "        trace_next(0);\n" +
+        "    }\n" +
         "}\n";
 
     static OutputStreamWriter out;
@@ -100,8 +106,15 @@ public class Trace {
         write("        //@ set len = len+1;\n\n");
     }
 
-    public static void trace_end() {
+    public static void taken() {
+        trace_next(1);
+    }
+
+    public static void not_taken() {
         trace_next(0);
+    }
+
+    public static void trace_end() {
         write(EPILOG);
         try {
             out.close();
