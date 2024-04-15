@@ -36,7 +36,7 @@
 
 package quicksort;
 
-import tracer.Trace;
+import prorunvis.Trace;
 
 class Quicksort {
 

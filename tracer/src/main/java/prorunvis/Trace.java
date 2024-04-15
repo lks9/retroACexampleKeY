@@ -1,4 +1,4 @@
-package tracer;
+package prorunvis;
 
 import java.io.File;
 import java.io.OutputStreamWriter;
@@ -9,12 +9,12 @@ import java.nio.file.Paths;
 import java.time.Clock;
 import java.time.Instant;
 
-import tracer.KeYobligation;
+import prorunvis.KeYobligation;
 
 public class Trace {
 
     static final String PROLOG =
-        "package tracer;\n" +
+        "package prorunvis;\n" +
         "\n" +
         "public class Trace {\n" +
         "\n" +
@@ -67,7 +67,7 @@ public class Trace {
 
         try {
             // construct the new unique trace directory
-            String traceDirName = "trace-out/" + traceName + "/tracer/";
+            String traceDirName = "trace-out/" + traceName + "/prorunvis/";
             File traceDir = new File(traceDirName);
             traceDir.mkdirs();
 

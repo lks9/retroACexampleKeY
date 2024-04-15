@@ -47,4 +47,4 @@ The final proof for array input `3 14 1 1455 -10 3 4 1 9 -10 15` consists of abo
 * `quicksort-main/`: Contains a main method to run quicksort from command line arguments.
   Not instrumented.
 * `tracer/`: Contains the `Trace.java` implementation, used when tracing. To validate the
-  trace, a different `Trace.java` is generated into `trace-out/trace*`.
+  trace, a different `Trace.java` is generated into `trace-out/trace*/prorunvis/`.

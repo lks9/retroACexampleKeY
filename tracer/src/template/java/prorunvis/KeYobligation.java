@@ -1,4 +1,4 @@
-package tracer;
+package prorunvis;
 
 public class KeYobligation {
     // will be replaced by gradle: @PROJECT_DIRECTORY@
