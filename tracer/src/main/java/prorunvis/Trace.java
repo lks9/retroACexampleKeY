@@ -34,13 +34,13 @@ public class Trace {
         "        //@ assume i == 0;\n" +
         "    }\n" +
         "\n" +
-        "    public static void trace_next(int elm) {\n" +
+        "    public static void next_elem(int elm) {\n" +
         "        //@ assume i < r.length;\n" +
         "        //@ assume r[i] == elm;\n" +
         "        //@ set i = i + 1;\n" +
         "    }\n" +
         "    public static void trace_end() {\n" +
-        "        trace_next(0);\n" +
+        "        next_elem(0);\n" +
         "        //@ assume i == r.length;\n" +
         "        //@ set i = 0;\n" +
         "    }\n" +
@@ -94,14 +94,14 @@ public class Trace {
         }
     }
 
-    public static void trace_next(int elm) {
+    public static void next_elem(int elm) {
         // write new traced element
         write("        //@ assume Trace.r[len] == " + (elm) + ";\n");
         write("        //@ set len = len+1;\n\n");
     }
 
     public static void trace_end() {
-        trace_next(0);
+        next_elem(0);
         write(EPILOG);
         try {
             out.close();

@@ -54,9 +54,9 @@ class Quicksort {
     public static void sort(int[] array) {
         Trace.trace_start();
         try {
-            Trace.trace_next(1);
+            Trace.next_elem(1);
             if(array.length > 0) {
-                Trace.trace_next(2);
+                Trace.next_elem(2);
                 sort(array, 0, array.length-1);
             }
         } finally {
@@ -65,9 +65,9 @@ class Quicksort {
     }
 
     private static void sort(int[] array, int from, int to) {
-        Trace.trace_next(3);
+        Trace.next_elem(3);
         if(from < to) {
-            Trace.trace_next(4);
+            Trace.next_elem(4);
             int splitPoint = split(array, from, to);
             sort(array, from, splitPoint-1);
             sort(array, splitPoint+1, to);
@@ -75,15 +75,15 @@ class Quicksort {
     }
 
     private static int split(int[] array, int from, int to) {
-        Trace.trace_next(5);
+        Trace.next_elem(5);
 
         int i = from;
         int pivot = array[to];
 
         for(int j = from; j < to; j++) {
-            Trace.trace_next(6);
+            Trace.next_elem(6);
             if(array[j] <= pivot) {
-                Trace.trace_next(7);
+                Trace.next_elem(7);
                 int t = array[i];
                 array[i] = array[j];
                 array[j] = t;
