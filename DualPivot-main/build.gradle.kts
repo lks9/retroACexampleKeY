@@ -23,6 +23,7 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation(project(":DualPivot"))
+    implementation(project(":DualPivot-tracer"))
 }
 
 application {
