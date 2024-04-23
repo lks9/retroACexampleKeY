@@ -7,6 +7,13 @@ the sorting is correct for as many recorded control flow traces as you want.
 
 Just a demo, don't expect anything more.
 
+## Dependencies
+
+* A current version of [KeY](https://www.key-project.org), tested with version 2.12.2,
+downloadable from [key-project.org](https://www.key-project.org).
+* Java Compiler, Java Runtime (anything above Java 8 should be fine)
+* (Gradle will download itself in the building step)
+
 ## Building
 
 ```
