@@ -1,6 +1,8 @@
 package prorunvis;
 
 public class KeYobligation {
+    public static final String PROJECT_NAME = "DualPivot";
+
     // will be replaced by gradle: @PROJECT_DIRECTORY@
     public static final String TRACED_SOURCE_FOLDER
         = "@PROJECT_DIRECTORY@/../DualPivot/src/main/java/";

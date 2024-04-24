@@ -26,17 +26,28 @@ gradlew shadowJar
 java -jar quicksort-main/build/libs/quicksort-main-all.jar 3 14 1 1455 -10
 ```
 
-Then an array with the given numbers is sorted. The trace goes into `trace-out/trace*`.
+Then an array with the given numbers is sorted. The trace goes into `trace-out/quicksort_*/`.
+
+Or for the other example:
+
+```
+java -jar DualPivot-main/build/libs/DualPivot-main-all.jar
+```
+
+This also sorts some numbers. The trace goes into `trace-out/DualPivot_*/`.
+
 
 ## Validating
 
-Open KeY, navigate into `trace-out/` and show the proof obligation.
+Open KeY, navigate into `trace-out/` and open one of the generated `*.key` proof
+obligation files. Just press KeY's play button and it will take around 5 minutes.
 
 ## Further Background
 
-The instrumentation of Quicksort was done manually. It is not hard to implement automatic instrumentation:
-For C, we already [implemented it](https://github.com/lks9/src-tracer).
-Apart form that, recording and validating can be done fully automatically.
+The instrumentation for DualPivot was done automatically, the code for doing that
+will be published soon. For C, we already [implemented it](https://github.com/lks9/src-tracer),
+which is also quite more optimized to minimize run-time overhead and trace size.
+Validating is also done fully automatically.
 With the exact same pre- and post-condition, we can validate any traces for any
 sorting algorithm, not just quicksort. And we don't need loop invariants and the like.
 
@@ -53,5 +64,12 @@ The final proof for array input `3 14 1 1455 -10 3 4 1 9 -10 15` consists of abo
   is one of the examples from the KeY project.
 * `quicksort-main/`: Contains a main method to run quicksort from command line arguments.
   Not instrumented.
-* `tracer/`: Contains the `Trace.java` implementation, used when tracing. To validate the
+* `quicksort-tracer/`: Contains the `Trace.java` implementation, used when tracing. To validate the
   trace, a different `Trace.java` is generated into `trace-out/trace*/prorunvis/`.
+
+There is the same directory structure for `DualPivot`.
+
+Technically, `quicksort-tracer/` and `DualPivot-tracer/` work the same, the only difference is
+in the names of proof obligations and trace files which we included into the Java sources.
+Normally, we would need to post-process the trace files to include this information afterwards,
+but for demonstration the current way is sufficient and quick.

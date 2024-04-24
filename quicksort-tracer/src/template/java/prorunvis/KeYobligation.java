@@ -1,6 +1,8 @@
 package prorunvis;
 
 public class KeYobligation {
+    public static final String PROJECT_NAME = "quicksort";
+
     // will be replaced by gradle: @PROJECT_DIRECTORY@
     public static final String TRACED_SOURCE_FOLDER
         = "@PROJECT_DIRECTORY@/../quicksort/src/main/java/";

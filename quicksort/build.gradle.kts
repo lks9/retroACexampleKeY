@@ -16,5 +16,5 @@ repositories {
 
 dependencies {
     // This dependency is used by the application.
-    implementation(project(":tracer"))
+    implementation(project(":quicksort-tracer"))
 }

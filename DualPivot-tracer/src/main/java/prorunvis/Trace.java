@@ -6,8 +6,8 @@ import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.Clock;
-import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import prorunvis.KeYobligation;
 
@@ -54,20 +54,22 @@ public class Trace {
         } catch (Exception e) {}
     }
 
+    static final String outDirName = "trace-out/";
+
     public static void trace_start() {
 
         // get current time
-        Clock clock = Clock.systemDefaultZone();
-        Instant instant = clock.instant();
-        long seconds = instant.getEpochSecond();
-        long nano = instant.getNano();
+        // use LocalDateTime because we want the local time *without* time zone information
+        LocalDateTime now = LocalDateTime.now();
 
         // unique trace name
-        String traceName = "traceSec" + seconds + "Nano" + nano;
+        // <projectName>_<dateTime> but <dateTime> without the usual ":" and " "
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ssnnnnnnnnn");
+        String traceName = KeYobligation.PROJECT_NAME + "_" + now.format(timeFormat);
 
         try {
             // construct the new unique trace directory
-            String traceDirName = "trace-out/" + traceName + "/prorunvis/";
+            String traceDirName = outDirName + traceName + "/prorunvis/";
             File traceDir = new File(traceDirName);
             traceDir.mkdirs();
 
@@ -76,7 +78,7 @@ public class Trace {
 
             // symlink the original project
             Path orig = Paths.get(KeYobligation.TRACED_SOURCE_FOLDER);
-            Path link = Paths.get("trace-out/" + traceName + "/src");
+            Path link = Paths.get(outDirName + traceName + "/src");
             Files.createSymbolicLink(link, orig);
 
             // write prolog
@@ -84,7 +86,7 @@ public class Trace {
 
             // write key proof obligation file
             OutputStreamWriter keyout
-                = new OutputStreamWriter(new FileOutputStream("trace-out/" + traceName + ".key"));
+                = new OutputStreamWriter(new FileOutputStream(outDirName + traceName + ".key"));
             keyout.write(KeYobligation.PROLOG);
             keyout.write("\\javaSource \"" + traceName + "/\";\n");
             keyout.write(KeYobligation.EPILOG);
