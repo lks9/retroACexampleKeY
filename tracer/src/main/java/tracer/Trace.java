@@ -40,7 +40,6 @@ public class Trace {
         "        //@ set i = i + 1;\n" +
         "    }\n" +
         "    public static void trace_end() {\n" +
-        "        trace_next(0);\n" +
         "        //@ assume i == r.length;\n" +
         "        //@ set i = 0;\n" +
         "    }\n" +
